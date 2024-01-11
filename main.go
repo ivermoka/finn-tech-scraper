@@ -156,16 +156,66 @@ func main() {
 
 func grabTech(content string) []string {
 	techPatterns := []string{
-		`SQL`, `Looker`, `PowerBI`, `Tableau`, `BigQuery`, `dbt`, `Python`, `Java`, `JavaScript`,
-		`C\+\+`, `C#`, `HTML`, `CSS`, `React`, `Angular`, `Node\.js`, `Vue\.js`, `Swift`, `Kotlin`,
-		`Ruby`, `Go(lang)?`, `PHP`, `Scala`, `Perl`, `Rust`, `TypeScript`, `Dart`, `Objective-C`,
-		`TensorFlow`, `PyTorch`, `Keras`, `Scikit-learn`, `Pandas`, `NumPy`, `Spark`, `Hadoop`,
-		`AWS`, `Azure`, `Google Cloud`, `Docker`, `Kubernetes`, `Git`, `Jenkins`, `CI/CD`,
-		`Machine Learning`, `Deep Learning`, `Artificial Intelligence`, `Data Science`,
-		`Blockchain`, `Cybersecurity`, `DevOps`, `Agile`, `Scrum`, `REST`, `GraphQL`, `API`,
-		`Microservices`, `Serverless`, `NoSQL`, `MongoDB`, `Redis`, `PostgreSQL`, `MySQL`, `SQLite`,
-		`Linux`, `Windows`, `macOS`, `iOS`, `Android`, `React Native`, `Flutter`, `Unity`,
+		// Programming Languages
+		"C", "C++", "C#", "Java", "Python", "JavaScript", "TypeScript", "Ruby", "Go", "PHP",
+		"Swift", "Kotlin", "Objective-C", "Rust", "Scala", "Perl", "Dart",
+
+		// Web Development
+		"HTML", "CSS", "React", "Angular", "Vue.js", "Node.js", "Express.js", "Django", "Flask",
+		"Spring Boot", "Laravel",
+
+		// Mobile Development
+		"Android", "iOS", "React Native", "Flutter", "SwiftUI",
+
+		// Database Technologies
+		"SQL", "MySQL", "PostgreSQL", "MongoDB", "Redis", "SQLite", "Firebase",
+
+		// Data Science and Machine Learning
+		"TensorFlow", "PyTorch", "Scikit-learn", "Pandas", "NumPy", "Apache Spark",
+
+		// Cloud Platforms
+		"AWS", "Azure", "Google Cloud", "Heroku", "DigitalOcean",
+
+		// Containers and Orchestration
+		"Docker", "Kubernetes", "OpenShift",
+
+		// Version Control
+		"Git", "GitHub", "GitLab",
+
+		// Continuous Integration/Continuous Deployment
+		"Jenkins", "Travis CI", "CircleCI",
+
+		// Web Services and APIs
+		"REST", "GraphQL", "SOAP",
+
+		// Microservices and Serverless
+		"Microservices", "Serverless", "AWS Lambda", "Azure Functions",
+
+		// DevOps Practices
+		"DevOps", "Infrastructure as Code (IaC)", "Configuration Management",
+
+		// Web Frameworks
+		"Flask", "Django", "Ruby on Rails", "Express.js", "Spring Boot", "Laravel",
+
+		// Game Development
+		"Unity", "Unreal Engine", "Godot",
+
+		// Blockchain
+		"Blockchain", "Ethereum", "Hyperledger",
+
+		// Cybersecurity
+		"Cybersecurity", "Ethical Hacking", "Penetration Testing",
+
+		// Agile and Scrum
+		"Agile", "Scrum", "Kanban",
+
+		// Operating Systems
+		"Linux", "Windows", "macOS",
+
+		// Other Technologies
+		"RESTful API", "SOAP", "WebSockets",
 	}
+
 
 	techPattern := fmt.Sprintf(`\b(%s)\b`, strings.Join(techPatterns, `|`))
 	r := regexp.MustCompile(techPattern)
