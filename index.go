@@ -73,6 +73,7 @@ func scraper() {
 			techCount[tech]++
 		}
 	}
+	cleanDB()
 	for tech, count := range techCount {
 		uploadToDB(tech, count)
 	}

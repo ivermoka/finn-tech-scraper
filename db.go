@@ -3,9 +3,10 @@ package main
 import (
 	"database/sql"
 	"fmt"
-	_ "github.com/lib/pq"
 	"os"
+
 	"github.com/joho/godotenv"
+	_ "github.com/lib/pq"
 )
 
 var db *sql.DB // kansje bad practise, men lettest
@@ -31,8 +32,11 @@ func Connect() {
 	}
 
 	fmt.Printf("version=%s\n", version)
+}
 
-	_, err = db.Exec("TRUNCATE TABLE technology_counts")
+func cleanDB() {
+	fmt.Println("Cleaning DB.")
+	_, err := db.Exec("TRUNCATE TABLE technology_counts")
 	if err != nil {
 		fmt.Println("Error emptying technology_counts", err)
 	}
