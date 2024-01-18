@@ -15,7 +15,7 @@ type Ad struct {
 	tech                        []string
 }
 
-func main() {
+func scraper() {
 	Connect()
 	defer db.Close()
 	var ads []Ad
