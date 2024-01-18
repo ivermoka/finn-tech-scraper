@@ -11,7 +11,6 @@ import (
 )
 
 type Ad struct {
-	url, title, company, origin string
 	tech                        []string
 }
 
@@ -46,24 +45,15 @@ func scraper() {
 	c.OnHTML("div.u-word-break", func(e *colly.HTMLElement) {
 		ad := Ad{}
 
-		ad.url = e.Request.URL.String()
-		ad.title = e.ChildText(".u-t2")
-		ad.company = e.DOM.Find("dl.definition-list>:nth-child(2)").First().Text()
 		content := e.ChildText("div.import-decoration")
 		ad.tech = grabTech(content)
-		ad.origin = "finn.no"
-		// fmt.Println(ad)
 		ads = append(ads, ad)
 	})
 	c.OnHTML("div[data-testid='aggregated-ad-object']", func(e *colly.HTMLElement) {
 		ad := Ad{}
 
-		ad.url = e.Request.URL.String()
-		ad.title = e.ChildText("h1.mb-32")
-		ad.company = e.DOM.Find("dl.space-y-8>:nth-child(2)").First().Text()
 		content := e.ChildText("section.mt-28")
 		ad.tech = grabTech(content)
-		ad.origin = "NAV"
 		ads = append(ads, ad)
 	})
 	c.OnHTML("a.button--icon-right", func(e *colly.HTMLElement) {
@@ -86,34 +76,20 @@ func scraper() {
 	for tech, count := range techCount {
 		uploadToDB(tech, count)
 	}
-	//	fmt.Println("Creating counts.json file.")
-	//
-	//	counts, err := json.Marshal(techCount)
-	//	if err != nil {
-	//		fmt.Println(err)
-	//	}
-	//	err = os.WriteFile("counts.json", counts, 0644)
-	//	if err != nil {
-	//		log.Fatal(err)
-	//	}
-	// fmt.Println("Technology Counts:")
-	// for tech, count := range techCount {
-	// 	fmt.Printf("%s: %d\n", tech, count)
-	// }
 }
 
 func grabTech(content string) []string {
 	techPatterns := []string{
 		// Programming Languages
-		"C", "C#", "Java", "Python", "JavaScript", "TypeScript", "Ruby", "Go", "PHP",
-		"Swift", "Kotlin", "Objective-C", "Rust", "Scala", "Perl", "Dart",
+		"C", "C++", "C#", "Java", "Python", "JavaScript", "TypeScript", "Ruby", "Go", "PHP",
+		"Swift", "Kotlin", "Rust", "Scala", "Perl", "Dart", "OCaml", "Zig",
 
 		// Web Development
 		"HTML", "CSS", "React", "Angular", "Vue.js", "Node.js", "Express.js", "Django", "Flask",
-		"Spring Boot", "Laravel",
+		"Spring Boot", "Laravel", ".NET",
 
 		// Mobile Development
-		"Android", "iOS", "React Native", "Flutter", "SwiftUI",
+		"React Native", "Flutter", "SwiftUI",
 
 		// Database Technologies
 		"SQL", "MySQL", "PostgreSQL", "MongoDB", "Redis", "SQLite", "Firebase",
@@ -122,10 +98,10 @@ func grabTech(content string) []string {
 		"TensorFlow", "PyTorch", "Scikit-learn", "Pandas", "NumPy", "Apache Spark",
 
 		// Cloud Platforms
-		"AWS", "Azure", "Google Cloud", "Heroku", "DigitalOcean",
+		"AWS", "Azure", "Google Cloud", "Heroku", "DigitalOcean", "Linode",
 
 		// Containers and Orchestration
-		"Docker", "Kubernetes", "OpenShift",
+		"Docker", "Kubernetes", "OpenShift", "k8s", 
 
 		// Version Control
 		"Git", "GitHub", "GitLab",
@@ -137,10 +113,10 @@ func grabTech(content string) []string {
 		"REST", "GraphQL", "SOAP",
 
 		// Microservices and Serverless
-		"Microservices", "Serverless", "AWS Lambda", "Azure Functions",
+		"AWS Lambda", "Azure Functions",
 
 		// DevOps Practices
-		"DevOps", "Infrastructure as Code (IaC)", "Configuration Management",
+		"DevOps",
 
 		// Web Frameworks
 		"Flask", "Django", "Ruby on Rails", "Express.js", "Spring Boot", "Laravel",
@@ -148,17 +124,8 @@ func grabTech(content string) []string {
 		// Game Development
 		"Unity", "Unreal Engine", "Godot",
 
-		// Blockchain
-		"Blockchain", "Ethereum", "Hyperledger",
-
 		// Cybersecurity
 		"Cybersecurity", "Ethical Hacking", "Penetration Testing",
-
-		// Agile and Scrum
-		"Agile", "Scrum", "Kanban",
-
-		// Operating Systems
-		"Linux", "Windows", "macOS",
 
 		// Other Technologies
 		"RESTful API", "SOAP", "WebSockets",

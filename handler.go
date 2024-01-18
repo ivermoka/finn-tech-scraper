@@ -8,6 +8,7 @@ import (
 )
 
 func main() {
+	fmt.Println("Program started.")
 	s := gocron.NewScheduler(time.Now().Location())
 
 	s.Every(1).Day().At("12:00").Do(func() {
