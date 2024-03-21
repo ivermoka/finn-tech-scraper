@@ -5,8 +5,6 @@ import (
 	"log"
 	"regexp"
 	"strings"
-	"time"
-
 	"github.com/gocolly/colly"
 )
 
@@ -26,14 +24,6 @@ func scraper() {
 	})
 	fmt.Println("No errors. Starting scrape. ")
 
-	go func() {
-		startTime := time.Now()
-		for {
-			elapsed := time.Since(startTime)
-			fmt.Printf("\rRunning scrape. Elapsed time: %v\n", elapsed.Round(time.Second))
-			time.Sleep(time.Second)
-		}
-	}()
 
 	c.OnHTML("article.sf-search-ad-legendary", func(e *colly.HTMLElement) {
 		link := e.ChildAttr("a", "href")
@@ -82,7 +72,7 @@ func scraper() {
 func grabTech(content string) []string {
 	techPatterns := []string{
 		// Programming Languages
-		"C#", "C", "Java", "Python", "JavaScript", "TypeScript", "Ruby", "Go", "PHP",
+		"C#", "C++", "Java", "Python", "JavaScript", "TypeScript", "Ruby", "Go", "PHP",
 		"Swift", "Kotlin", "Rust", "Scala", "Perl", "Dart", "OCaml", "Zig",
 
 		// Web Development
@@ -146,3 +136,4 @@ func grabTech(content string) []string {
 	}
 	return techList
 }
+
