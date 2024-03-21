@@ -9,10 +9,16 @@ import (
 
 func main() {
 	fmt.Println("Program started.")
-	s := gocron.NewScheduler(time.Now().Location())
+	location, err := time.LoadLocation("Europe/Oslo")
+	if err != nil {
+		fmt.Println("Error loading location:", err)
+		return
+	}
+
+	s := gocron.NewScheduler(location)
 
 	s.Every(1).Day().At("12:00").Do(func() {
-		fmt.Println("Running cron job at 12:00.")
+		fmt.Println("Running cron job at ", time.Now().UTC().UnixMilli())
 		scraper()
 	})
 

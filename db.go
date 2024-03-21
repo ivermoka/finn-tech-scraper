@@ -19,7 +19,6 @@ func init() {
 
 func Connect() {
 	connStr := fmt.Sprintf("postgresql://%s:%s@ep-twilight-cell-35826753.eu-central-1.aws.neon.tech/job-scraper?sslmode=require", os.Getenv("NEONUSER"), os.Getenv("NEONPASS"))
-	fmt.Println("Connection String:", connStr)
 	var err error
 	db, err = sql.Open("postgres", connStr)
 	if err != nil {

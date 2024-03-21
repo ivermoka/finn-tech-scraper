@@ -30,7 +30,7 @@ func scraper() {
 		startTime := time.Now()
 		for {
 			elapsed := time.Since(startTime)
-			fmt.Printf("\rRunning scrape. Elapsed time: %v", elapsed.Round(time.Second))
+			fmt.Printf("\rRunning scrape. Elapsed time: %v\n", elapsed.Round(time.Second))
 			time.Sleep(time.Second)
 		}
 	}()
@@ -82,7 +82,7 @@ func scraper() {
 func grabTech(content string) []string {
 	techPatterns := []string{
 		// Programming Languages
-		"C", "C++", "C#", "Java", "Python", "JavaScript", "TypeScript", "Ruby", "Go", "PHP",
+		"C#", "C", "Java", "Python", "JavaScript", "TypeScript", "Ruby", "Go", "PHP",
 		"Swift", "Kotlin", "Rust", "Scala", "Perl", "Dart", "OCaml", "Zig",
 
 		// Web Development
